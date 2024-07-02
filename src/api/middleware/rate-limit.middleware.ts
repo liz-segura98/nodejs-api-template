@@ -7,4 +7,4 @@ const ConfigRateLimit: Partial<Options> = {
   legacyHeaders: false, // Enable/Disable the `X-RateLimit-*` headers (here, disabled).
 }
 
-export const RateLimit: RateLimitRequestHandler = rateLimit(ConfigRateLimit);
+export const RateLimitHandler: RateLimitRequestHandler = rateLimit(ConfigRateLimit);

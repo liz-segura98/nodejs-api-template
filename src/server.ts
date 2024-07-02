@@ -5,7 +5,8 @@ import { config  } from './config';
 import routes from './api';
 import listEndpoints from 'express-list-endpoints';
 import db from './config/database-sequelize.config';
-import { Cors, RateLimit } from './api/middleware';
+import { CorsHandler, RateLimitHandler } from './api/middleware';
+import { TranslateHandler } from './api/middleware/translate.middleware';
 
 // Specify the port number for the server
 const port: number = config.api.port;
@@ -13,10 +14,12 @@ const port: number = config.api.port;
 // Create an Express application
 const app = express();
 
-// Configure global cors
-app.use(Cors);
+// Configure global CorsHandler
+app.use(CorsHandler);
 // Configure global Rate Limits
-app.use(RateLimit);
+app.use(RateLimitHandler);
+// Configure translate handler
+app.use(TranslateHandler);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

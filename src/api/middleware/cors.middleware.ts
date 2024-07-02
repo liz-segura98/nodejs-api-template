@@ -16,4 +16,4 @@ export const ConfigCORS: cors.CorsOptions = {
   methods: ['GET,PUT,POST,DELETEHEAD'],
 }
 
-export const Cors = cors(ConfigCORS);
+export const CorsHandler = cors(ConfigCORS);

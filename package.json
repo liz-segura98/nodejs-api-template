@@ -26,6 +26,7 @@
     "express": "^4.19.2",
     "express-list-endpoints": "^7.1.0",
     "express-rate-limit": "^7.3.1",
+    "i18n": "^0.15.1",
     "joi": "^17.13.3",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
