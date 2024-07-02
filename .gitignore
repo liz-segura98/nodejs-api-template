@@ -1,0 +1,5 @@
+# Files that we will exclude from the repository
+
+/dist
+/node_modules
+.env

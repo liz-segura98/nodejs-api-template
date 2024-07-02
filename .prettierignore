@@ -1,0 +1,3 @@
+# Files that we will be excluded from the prettier validation
+.dist
+.node_modules
