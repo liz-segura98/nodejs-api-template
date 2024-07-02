@@ -1,5 +1,6 @@
 import * as Joi from 'joi';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 // Validate, before running, that all the .env variables are set
@@ -10,10 +11,7 @@ export const validateEnv = Joi.object()
     PROJECT_NAME: Joi.string().description('API Template'),
     PREFIX: Joi.string().default('/api/v1').description('API Template'),
     USE_DATABASE: Joi.boolean().default(false).description('Decide if API has access to a DB'),
-    DATABASE_HOST: Joi.string().description('Database host'),
-    DATABASE_NAME: Joi.string().description('Database name'),
-    DATABASE_USER: Joi.string().description('Database user'),
-    DATABASE_PASSWORD: Joi.string().description('Database password'),
+    DATABASE_SQLITE_PATH: Joi.string().description('Database path for SQLite'),
   })
   .unknown();
 
@@ -30,12 +28,9 @@ export interface IConfig {
     port: number;
     prefix: string;
   };
-  database?: {
+  database: {
     useDatabase: boolean;
-    host?: string;
-    user?: string;
-    password?: string;
-    database?: string;
+    sqlitePath?: string;
   }
 }
 
@@ -47,9 +42,6 @@ export const config: IConfig = {
   },
   database: {
     useDatabase: envVars.USE_DATABASE,
-    host: envVars.DATABASE_HOST,
-    user: envVars.DATABASE_USER,
-    password: envVars.DATABASE_PASSWORD,
-    database: envVars.DATABASE_NAME,
+    sqlitePath: envVars.DATABASE_SQLITE_PATH,
   }
 };
