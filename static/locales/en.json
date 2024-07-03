@@ -1,0 +1,8 @@
+{
+	"user": {
+		"create-user": {
+			"email-used": "Ya existe un usuario con dicho correo",
+			"success": "Usuario creado"
+		}
+	}
+}

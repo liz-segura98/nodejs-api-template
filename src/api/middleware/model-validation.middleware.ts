@@ -1,25 +1,12 @@
-import { RequestHandler } from 'express';
-import schemas from '../../models';
+import { RequestHandler, Request, Response } from 'express';
+import Joi from 'joi';
+import { ApiErrorResponse } from '../../shared/interfaces/api-response.interface';
+import { ValidationLocation } from '../../shared/enums';
 
 interface ValidationError {
   message: string;
   type: string;
 }
-
-interface JoiError {
-  status: string;
-  error: {
-    original: unknown;
-    details: ValidationError[];
-  };
-}
-
-interface CustomError {
-  status: string;
-  error: string;
-}
-
-const supportedMethods = ['post', 'put', 'patch', 'delete'];
 
 const validationOptions = {
   abortEarly: false,
@@ -27,46 +14,34 @@ const validationOptions = {
   stripUnknown: false,
 };
 
-const schemaValidator = (path: string, useJoiError = true): RequestHandler => {
-  const schema = schemas[path];
+export interface ValidateProps {
+  location: ValidationLocation;
+  schema: Joi.ObjectSchema<any>;
+}
 
-  if (!schema) {
-    throw new Error(`Schema not found for path: ${path}`);
+export const validateRequest = (schemaArray: ValidateProps[]): RequestHandler => {
+  if (!schemaArray.length) {
+    throw new Error('No schema was found');
   }
 
-  return (req, res, next) => {
-    const method = req.method.toLowerCase();
+  return (req: Request, res: Response, next: any) => {
+    for (const element of schemaArray) {
+      const { schema, location }: ValidateProps = element;
+      const { error, value } = schema.validate(req[location], validationOptions);
 
-    if (!supportedMethods.includes(method)) {
-      return next();
+      // If there is an error, return it as response
+      if (error) {
+        const errorResponse: ApiErrorResponse = {
+          error: 'failed',
+          details: error.details.map(({ message }: ValidationError) => (message.replace(/['"]/g, ''))),
+        };
+
+        return res.status(400).json(errorResponse);
+      }
+      // Validation successful, return data to it's location
+      req[location] = value;
     }
-
-    const { error, value } = schema.validate(req.body, validationOptions);
-
-    if (error) {
-      const customError: CustomError = {
-        status: 'failed',
-        error: 'Invalid request. Please review request and try again.',
-      };
-
-      const joiError: JoiError = {
-        status: 'failed',
-        error: {
-          original: error._original,
-          details: error.details.map(({ message, type }: ValidationError) => ({
-            message: message.replace(/['"]/g, ''),
-            type,
-          })),
-        },
-      };
-
-      return res.status(422).json(useJoiError ? joiError : customError);
-    }
-
-    // validation successful
-    req.body = value;
+    
     return next();
   };
 };
-
-export default schemaValidator;
