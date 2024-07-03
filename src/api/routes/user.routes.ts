@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { UserController } from '../../controllers';
-import { ValidationHandler } from '../middleware';
+import { UsesDatabaseHandler, ValidationHandler } from '../middleware';
 import { RegisterUserValidate } from '../../models/user';
 import { ValidationLocation } from '../../shared/enums/validation.enum';
 
@@ -13,6 +13,7 @@ export function userRoutes(app: Router): void {
   // Creates new user
   route.post(
     '/register',
+    UsesDatabaseHandler,
     ValidationHandler([{ schema: RegisterUserValidate, location: ValidationLocation.BODY }]),
     UserController.registerUser
   );

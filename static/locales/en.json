@@ -1,4 +1,9 @@
 {
+	"general": {
+		"errors": {
+			"no-database": "La BD no se encuentra arriba, probar más tarde"
+		}
+	},
 	"auth": { 
 		"errors": {
 			"not-authorized": "Acceso denegado, credenciales incorrectas",

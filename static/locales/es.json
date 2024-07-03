@@ -1,4 +1,9 @@
 {
+	"general": {
+		"errors": {
+			"no-database": "Database down, try again later"
+		}
+	},
 	"auth": {
 		"errors": {"not-authorized": "Denied access",
 			"not-found": "User not found"

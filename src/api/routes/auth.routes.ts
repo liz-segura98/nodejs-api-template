@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { AuthController } from '../../controllers';
 import { LoginRequest } from '../../models/auth';
 import { ValidationLocation } from '../../shared/enums';
-import { AuthenticationHandler, ValidationHandler } from '../middleware';
+import { AuthenticationHandler, UsesDatabaseHandler, ValidationHandler } from '../middleware';
 
 const route: Router = Router();
 
@@ -13,6 +13,7 @@ export function authRoutes(app: Router): void {
   // Validate credentials of user
   route.post(
     '/login',
+    UsesDatabaseHandler,
     ValidationHandler([{ schema: LoginRequest, location: ValidationLocation.BODY }]),
     AuthController.login,
   );
@@ -20,6 +21,7 @@ export function authRoutes(app: Router): void {
   // Return data of current token
   route.get(
     '/me',
+    UsesDatabaseHandler,
     AuthenticationHandler,
     AuthController.me,
   );
