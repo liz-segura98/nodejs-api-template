@@ -19,7 +19,8 @@ export interface ValidateProps {
   schema: Joi.ObjectSchema<any>;
 }
 
-export const validateRequest = (schemaArray: ValidateProps[]): RequestHandler => {
+// This middleware will do a validation of data sent to the API, that needs to match the default configuration per each EP
+export const ValidationHandler = (schemaArray: ValidateProps[]): RequestHandler => {
   if (!schemaArray.length) {
     throw new Error('No schema was found');
   }

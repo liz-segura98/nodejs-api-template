@@ -6,6 +6,7 @@ import path from 'path';
 // Replace this with your own route
 const LocalesPath: string = '../../../static/locales';
 
+// This will return data in user's language
 export const TranslateHandler: RequestHandler = (req: Request, res: Response, next) => {
   const acceptLanguage: string = req.headers['accept-language'] || LOCALES.ENGLISH;
   

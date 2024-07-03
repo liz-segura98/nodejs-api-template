@@ -7,4 +7,5 @@ const ConfigRateLimit: Partial<Options> = {
   legacyHeaders: false, // Enable/Disable the `X-RateLimit-*` headers (here, disabled).
 }
 
+// This middleware will allow only certain request per IP based on configuration
 export const RateLimitHandler: RateLimitRequestHandler = rateLimit(ConfigRateLimit);

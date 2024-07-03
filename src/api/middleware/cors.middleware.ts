@@ -13,7 +13,7 @@ const allowOrigins = function (origin: any, callback: any) {
 
 export const ConfigCORS: cors.CorsOptions = {
   origin: allowOrigins,
-  methods: ['GET,PUT,POST,DELETEHEAD'],
+  methods: ['GET,PUT,POST,DELETE'],
 }
 
 export const CorsHandler = cors(ConfigCORS);
