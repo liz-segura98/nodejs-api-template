@@ -21,5 +21,5 @@ export const TranslateHandler: RequestHandler = (req: Request, res: Response, ne
   });
 
   res.locals.i18n = i18n;
-  next()
+  next();
 }

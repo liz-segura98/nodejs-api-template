@@ -1,4 +1,13 @@
 {
+	"auth": {
+		"errors": {"not-authorized": "Denied access",
+			"not-found": "User not found"
+		},
+		"login": {
+			"bad-credentials": "Invalid credentials",
+			"success": "Welcome"
+		}
+	},
 	"user": {
 		"create-user": {
 			"email-used": "Email is already taken",

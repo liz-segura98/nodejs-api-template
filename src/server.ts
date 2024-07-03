@@ -5,8 +5,7 @@ import { config  } from './config';
 import routes from './api';
 import listEndpoints from 'express-list-endpoints';
 import db from './config/database-sequelize.config';
-import { CorsHandler, RateLimitHandler } from './api/middleware';
-import { TranslateHandler } from './api/middleware/translate.middleware';
+import { CorsHandler, RateLimitHandler, TranslateHandler } from './api/middleware';
 
 // Specify the port number for the server
 const port: number = config.api.port;

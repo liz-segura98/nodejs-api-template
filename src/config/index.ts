@@ -12,6 +12,8 @@ export const validateEnv = Joi.object()
     PREFIX: Joi.string().default('/api/v1').description('API Template'),
     USE_DATABASE: Joi.boolean().default(false).description('Decide if API has access to a DB'),
     DATABASE_SQLITE_PATH: Joi.string().description('Database path for SQLite'),
+    JWT_SECRET: Joi.string().required().description('JWT Secret password to do hashing'),
+    JWT_EXPIRES_IN: Joi.string().required().description('JWT to expire in any time'),
   })
   .unknown();
 
@@ -28,6 +30,10 @@ export interface IConfig {
     port: number;
     prefix: string;
   };
+  jwt: {
+    secret: string;
+    expiresIn: string;
+  };
   database: {
     useDatabase: boolean;
     sqlitePath?: string;
@@ -40,8 +46,12 @@ export const config: IConfig = {
     port: envVars.PORT,
     prefix: envVars.PREFIX,
   },
+  jwt: {
+    secret: envVars.JWT_SECRET,
+    expiresIn: envVars.JWT_EXPIRES_IN,
+  },
   database: {
     useDatabase: envVars.USE_DATABASE,
     sqlitePath: envVars.DATABASE_SQLITE_PATH,
-  }
+  },
 };

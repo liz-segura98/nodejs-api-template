@@ -1,4 +1,14 @@
 {
+	"auth": { 
+		"errors": {
+			"not-authorized": "Acceso denegado, credenciales incorrectas",
+			"not-found": "Usuario no encontrado"
+		},
+		"login": {
+			"bad-credentials": "Credenciales inválidas",
+			"success": "Bienvenido"
+		}
+	},
 	"user": {
 		"create-user": {
 			"email-used": "Ya existe un usuario con dicho correo",
