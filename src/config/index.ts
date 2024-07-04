@@ -15,6 +15,11 @@ export const validateEnv = Joi.object()
     ALLOWED_ORIGINS: Joi.string().default(['*']).description('Which are the valid origins that could access the API'),
     ENCRYPT_SECRET_KEY: Joi.string().default('').description('HASHING - Secret key to do hash of data'),
     ENCRYPT_SECRET_IV: Joi.string().default('').description('HASHING - Secret IV to do hash of data'),
+    SMTP_HOST: Joi.string().default('').description('EMAIL - Owner of account emails'),
+    SMTP_EMAIL: Joi.string().default('').description('EMAIL - Account who will send emails'),
+    SMTP_PASSWORD: Joi.string().default('').description('EMAIL - Account who will send emails'),
+    SMTP_PORT: Joi.string().default(25).description('EMAIL - Port where the data is deployed'),
+    SMTP_EMAIL_NOTIFICATION: Joi.string().default('').description('EMAIL - Account who will send emails'),
   })
   .unknown();
 
@@ -43,6 +48,13 @@ export interface IConfig {
   database: {
     useDatabase: boolean;
     sqlitePath?: string;
+  };
+  smtp: {
+    host: string;
+    port: number;
+    email: string;
+    emailTo: string;
+    password: string;
   }
 }
 
@@ -65,4 +77,11 @@ export const config: IConfig = {
     useDatabase: envVars.USE_DATABASE,
     sqlitePath: envVars.DATABASE_SQLITE_PATH,
   },
+  smtp: {
+    host: envVars.SMTP_HOST,
+    email: envVars.SMTP_EMAIL,
+    password: envVars.SMTP_PASSWORD,
+    port: envVars.SMTP_PORT,
+    emailTo: envVars.SMTP_EMAIL_NOTIFICATION,
+  }
 };

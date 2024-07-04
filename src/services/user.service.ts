@@ -8,23 +8,6 @@ export class UserServices {
     return await UserEntity.create(data);
   }
 
-
-  /*
-  //create a User
-  
-
-  //get all Users
-  async getUsers() {
-    try {
-      const Users = await User.find({})
-      return Users
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  */
-
   //get a single User
   async getUser(where: WhereOptions<UserAttributes>): Promise<User | null> {
     return await UserEntity.findOne({ where });
