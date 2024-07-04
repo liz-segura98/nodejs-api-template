@@ -6,6 +6,8 @@ import routes from './api';
 import listEndpoints from 'express-list-endpoints';
 import db from './config/database-sequelize.config';
 import { CorsHandler, RateLimitHandler, TranslateHandler } from './api/middleware';
+import { ErrorHandler } from './api/middleware/error.middleware';
+import 'express-async-errors';
 
 // Specify the port number for the server
 const port: number = config.api.port;
@@ -25,6 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Import routes from 'routes' directory
 app.use(config.api.prefix, routes());
+
+// Handler any error from the API
+app.use(ErrorHandler);
 
 // Start the server and listen on the specified port
 const start = (port: number) => {

@@ -3,7 +3,14 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export interface ApiErrorResponse {
-  error: string;
+export interface ApiErrorDetailResponse {
+  code: string;
+  status: number;
+  message: string;
   details: string[];
+}
+
+export interface ApiErrorResponse {
+  message: string;
+  error: ApiErrorDetailResponse;
 }

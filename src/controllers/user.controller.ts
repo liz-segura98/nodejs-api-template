@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { userService } from '../services/user.service';
-import { ApiErrorResponse, ApiResponse } from '../shared/interfaces/api-response.interface';
+import { ApiResponse } from '../shared/interfaces/api-response.interface';
 import { User } from '../models/user';
 import { hash } from 'bcrypt';
+import { ConflictError } from '../shared/errors';
 
 class UserControllerClass {
   registerUser = async (req: Request, res: Response) => {
@@ -11,12 +12,10 @@ class UserControllerClass {
 
     const existUser: User | null = await userService.getUser({ email });
     if (existUser) {
-      const errorResponse: ApiErrorResponse = {
-        error: i18n.__('user.create-user.email-used'),
-        details: [i18n.__('user.create-user.email-used'),]
-      };
-      res.status(409).send(errorResponse);
-      return;
+      throw new ConflictError({
+        message: i18n.__('user.create-user.email-used'),
+        context: [i18n.__('user.create-user.email-used'),]
+      });
     }
 
     const data = {

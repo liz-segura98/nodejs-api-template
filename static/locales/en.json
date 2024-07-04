@@ -1,23 +1,24 @@
 {
 	"general": {
 		"errors": {
-			"no-database": "La BD no se encuentra arriba, probar más tarde"
+			"no-database": "Database down, try again later",
+			"no-schema": "Schema not found",
+			"invalid-data": "Invalid data"
 		}
 	},
-	"auth": { 
-		"errors": {
-			"not-authorized": "Acceso denegado, credenciales incorrectas",
-			"not-found": "Usuario no encontrado"
+	"auth": {
+		"errors": {"not-authorized": "Denied access",
+			"not-found": "User not found"
 		},
 		"login": {
-			"bad-credentials": "Credenciales inválidas",
-			"success": "Bienvenido"
+			"bad-credentials": "Invalid credentials",
+			"success": "Welcome"
 		}
 	},
 	"user": {
 		"create-user": {
-			"email-used": "Ya existe un usuario con dicho correo",
-			"success": "Usuario creado"
+			"email-used": "Email is already taken",
+			"success": "User created"
 		}
 	}
 }
