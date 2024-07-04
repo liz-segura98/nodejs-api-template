@@ -1,8 +1,9 @@
 import cors from 'cors';
+import { config } from '../../config';
 
 const OriginError: string = 'The CORS policy for this site does not allow access from the specified Origin.';
 // Update to your given origins
-const allowedList = ['http://localhost:3000'];
+const allowedList: string[] = config.api.allowedOrigins;
 
 const allowOrigins = function (origin: any, callback: any) {
   if (origin && allowedList.indexOf(origin) === -1) {

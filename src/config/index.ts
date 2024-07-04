@@ -8,12 +8,13 @@ export const validateEnv = Joi.object()
   .keys({
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
     PORT: Joi.number().positive().required(),
-    PROJECT_NAME: Joi.string().description('API Template'),
-    PREFIX: Joi.string().default('/api/v1').description('API Template'),
+    PROJECT_NAME: Joi.string().default('API Template').description('API Template'),
+    PREFIX: Joi.string().default('/api/v1').description('API prefix to each request'),
     USE_DATABASE: Joi.boolean().default(false).description('Decide if API has access to a DB'),
     DATABASE_SQLITE_PATH: Joi.string().description('Database path for SQLite'),
     JWT_SECRET: Joi.string().required().description('JWT Secret password to do hashing'),
     JWT_EXPIRES_IN: Joi.string().required().description('JWT to expire in any time'),
+    ALLOWED_ORIGINS: Joi.string().default(['*']).description('Which are the valid origins that could access the API'),
   })
   .unknown();
 
@@ -29,6 +30,7 @@ export interface IConfig {
   api: {
     port: number;
     prefix: string;
+    allowedOrigins: string[];
   };
   jwt: {
     secret: string;
@@ -45,6 +47,7 @@ export const config: IConfig = {
   api: {
     port: envVars.PORT,
     prefix: envVars.PREFIX,
+    allowedOrigins: envVars.ALLOWED_ORIGINS.split(','),
   },
   jwt: {
     secret: envVars.JWT_SECRET,
