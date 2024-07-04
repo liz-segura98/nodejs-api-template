@@ -1,11 +1,11 @@
-import { RequestHandler, Request, Response } from "express";
+import { RequestHandler, Request, Response, NextFunction } from "express";
 import { config } from "../../config";
 import { UnauthorizedError } from "../../shared/errors";
 
 
 const jwt = require('jsonwebtoken');
 
-export const AuthenticationHandler: RequestHandler = (req: Request, res: Response, next) => {
+export const AuthenticationHandler: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
   const { i18n } = res.locals;
   const authHeader: string | undefined = req.headers['authorization'];
 

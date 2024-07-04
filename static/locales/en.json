@@ -6,6 +6,21 @@
 			"invalid-data": "Invalid data"
 		}
 	},
+	"api-key": {
+		"errors": {
+			"too-many-request": "Max API calls exceeded."
+		},
+		"country": {
+			"list": "Country list",
+			"create-success": "Country created successfully",
+			"no-name": "Country has no name",
+			"already-exist": "Country with name {{name}}"
+		},
+		"user": {
+			"no-username": "User has no username",
+			"created-success": "User created successfully"
+		}
+	},
 	"auth": {
 		"errors": {"not-authorized": "Denied access",
 			"not-found": "User not found"

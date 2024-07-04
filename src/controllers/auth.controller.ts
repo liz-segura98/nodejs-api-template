@@ -26,7 +26,6 @@ class AuthControllerClass {
         message: i18n.__('auth.login.bad-credentials'),
         context: [i18n.__('auth.login.bad-credentials'),]
       });
-      return;
     }
 
     const token: string = jwt.sign({ id: user.id }, config.jwt.secret, {

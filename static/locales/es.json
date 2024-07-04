@@ -6,7 +6,25 @@
 			"invalid-data": "La información proporcionada no es válida"
 		}
 	},
-	"auth": { 
+	"api-key": {
+		"errors": {
+			"too-many-request": "Peticiones al API máximas excedidas",
+			"": {
+				"too-many-request": "api-key.errors..too-many-request"
+			}
+		},
+		"country": {
+			"list": "Listado de países registrados",
+			"create-success": "Se ha creado el país",
+			"no-name": "El país no tiene nombre",
+			"already-exist": "El país con nombre {{name}} ya existe"
+		},
+		"user": {
+			"no-username": "El usuario no tiene username",
+			"created-success": "Se ha creado el usuario"
+		}
+	},
+	"auth": {
 		"errors": {
 			"not-authorized": "Acceso denegado, credenciales incorrectas",
 			"not-found": "Usuario no encontrado"
