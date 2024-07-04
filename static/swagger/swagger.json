@@ -1,0 +1,63 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"PingResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "api-template",
+		"version": "1.0.0",
+		"description": "This is a template to create an API using NodeJs",
+		"license": {
+			"name": "UNLICENSED"
+		},
+		"contact": {
+			"name": "Lizeth García ",
+			"url": "lizeth.garcia@ancient.global"
+		}
+	},
+	"paths": {
+		"/ping": {
+			"get": {
+				"operationId": "GetMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PingResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

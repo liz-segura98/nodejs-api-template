@@ -1,0 +1,30 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "api-template",
+		"version": "1.0.0",
+		"description": "This is a template to create an API using NodeJs",
+		"license": {
+			"name": "UNLICENSED"
+		},
+		"contact": {
+			"name": "Lizeth García ",
+			"url": "lizeth.garcia@ancient.global"
+		}
+	},
+	"paths": {},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

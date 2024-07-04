@@ -5,7 +5,7 @@ import { userRoutes, authRoutes } from './routes';
 export default () => {
   const app: Router = Router();
   authRoutes(app);
-  userRoutes(app);
+  //userRoutes(app);
 
   return app;
 };

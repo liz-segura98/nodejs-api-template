@@ -6,8 +6,11 @@ import { config } from '../config';
 import { ILoginResponse, ILoginRequest, IMeResponse } from '../models/auth';
 import { NotFoundError, UnauthorizedError } from '../shared/errors';
 const jwt = require('jsonwebtoken');
+import { Get, Route, Controller as Router } from "tsoa"
 
-class AuthControllerClass {
+@Route("auth")
+  class AuthController {
+  @Get("/login")
   login = async (req: Request, res: Response) => {
     const { i18n } = res.locals;
     const { email, password }: ILoginRequest = req.body;
@@ -42,6 +45,7 @@ class AuthControllerClass {
     res.status(200).send(response);
   }
 
+  /*
   me = async (req: Request, res: Response) => {
     const { i18n, userId: id } = res.locals;
 
@@ -65,6 +69,22 @@ class AuthControllerClass {
     }
     res.status(200).send(response);
   }
+  */
 }
 
-export const AuthController = new AuthControllerClass();
+//export const AuthController = new AuthControllerClass();
+
+
+interface PingResponse {
+  message: string;
+}
+
+@Route("ping")
+export default class PingController {
+  @Get("/")
+  public async getMessage(): Promise<PingResponse> {
+    return {
+      message: "hello",
+    };
+  }
+}

@@ -7,12 +7,15 @@ export const validateEnv = Joi.object()
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
     PORT: Joi.number().positive().required(),
     PROJECT_NAME: Joi.string().default('API Template').description('API Template'),
+    PROJECT_DESCRIPTION: Joi.string().default('API Template').description('Template to create an API using NodeJs + Express + Typescript'),
+    PROJECT_VERSION: Joi.string().default('1.0.0').description('Version of project'),
     PREFIX: Joi.string().default('/api/v1').description('API prefix to each request'),
     USE_DATABASE: Joi.boolean().default(false).description('Decide if API has access to a DB'),
     DATABASE_SQLITE_PATH: Joi.string().description('Database path for SQLite'),
     JWT_SECRET: Joi.string().required().description('JWT Secret password to do hashing'),
     JWT_EXPIRES_IN: Joi.string().required().description('JWT to expire in any time'),
     ALLOWED_ORIGINS: Joi.string().default(['*']).description('Which are the valid origins that could access the API'),
+    SWAGGER_VERSION: Joi.string().default('3.0.0').description('Version of OPEN API used on swagger'),
   })
   .unknown();
 
@@ -37,6 +40,14 @@ export interface IConfig {
   database: {
     useDatabase: boolean;
     sqlitePath?: string;
+  };
+  swagger: {
+    openapi: '3.0.0',
+    info: {
+      title: 'My API',
+      version: '1.0.0',
+      description: 'My API Description',
+    },
   }
 }
 
@@ -55,4 +66,12 @@ export const config: IConfig = {
     useDatabase: envVars.USE_DATABASE,
     sqlitePath: envVars.DATABASE_SQLITE_PATH,
   },
+  swagger: {
+    openapi: envVars.SWAGGER_VERSION,
+    info: {
+      title: envVars.PROJECT_NAME,
+      version: envVars.PROJECT_VERSION,
+      description: envVars.PROJECT_DESCRIPTION,
+    },
+  }
 };

@@ -8,6 +8,8 @@ import db from './config/database-sequelize.config';
 import { CorsHandler, RateLimitHandler, TranslateHandler } from './api/middleware';
 import { ErrorHandler } from './api/middleware/error.middleware';
 import 'express-async-errors';
+import swaggerUi from "swagger-ui-express";
+
 
 // Specify the port number for the server
 const port: number = config.api.port;
@@ -27,6 +29,17 @@ app.use(express.urlencoded({ extended: true }));
 
 // Import routes from 'routes' directory
 app.use(config.api.prefix, routes());
+
+
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(config.swagger, {
+    swaggerOptions: {
+      url: "public/swagger/swagger.json",
+    },
+  })
+);
 
 // Handler any error from the API
 app.use(ErrorHandler);
