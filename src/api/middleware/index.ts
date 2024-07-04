@@ -5,3 +5,4 @@ export * from './authentication.middleware';
 export * from './translate.middleware';
 export * from './uses-database.middleware';
 export * from './auth-key.middleware';
+export * from './hashing.middleware';

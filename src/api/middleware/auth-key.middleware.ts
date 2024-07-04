@@ -5,7 +5,7 @@ import { ErrorCode } from "../../shared/enums";
 
 const API_KEY_PROPERTY = "x-api-key";
 
-export const AuthenticateKeyHandler: RequestHandler = (req: Request, res: Response, next) => {
+export const AuthenticateKeyHandler: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
   const { i18n } = res.locals;
   const apiKey = req.header(API_KEY_PROPERTY);
 

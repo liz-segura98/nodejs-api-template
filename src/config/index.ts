@@ -13,6 +13,8 @@ export const validateEnv = Joi.object()
     JWT_SECRET: Joi.string().required().description('JWT Secret password to do hashing'),
     JWT_EXPIRES_IN: Joi.string().required().description('JWT to expire in any time'),
     ALLOWED_ORIGINS: Joi.string().default(['*']).description('Which are the valid origins that could access the API'),
+    ENCRYPT_SECRET_KEY: Joi.string().default('').description('HASHING - Secret key to do hash of data'),
+    ENCRYPT_SECRET_IV: Joi.string().default('').description('HASHING - Secret IV to do hash of data'),
   })
   .unknown();
 
@@ -30,6 +32,10 @@ export interface IConfig {
     prefix: string;
     allowedOrigins: string[];
   };
+  encrypt: {
+    secretKey: string;
+    secretIv: string;
+  },
   jwt: {
     secret: string;
     expiresIn: string;
@@ -46,6 +52,10 @@ export const config: IConfig = {
     port: envVars.PORT,
     prefix: envVars.PREFIX,
     allowedOrigins: envVars.ALLOWED_ORIGINS.split(','),
+  },
+  encrypt: {
+    secretKey: envVars.ENCRYPT_SECRET_KEY,
+    secretIv: envVars.ENCRYPT_SECRET_IV,
   },
   jwt: {
     secret: envVars.JWT_SECRET,

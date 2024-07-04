@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { Countries, users } from '../shared/constants';
 import { ErrorCode } from '../shared/enums';
 import { BadRequestError, ConflictError } from '../shared/errors';
@@ -6,7 +6,7 @@ import { ApiResponse } from '../shared/interfaces/api-response.interface';
 import { genAPIKey } from '../shared/utils';
 
 class APIKeyControllerClass {
-  register = (req: Request, res: Response) => {
+  register = (req: Request, res: Response, next: NextFunction) => {
     const { i18n } = res.locals;
     const { username } = req.body;
 
@@ -33,9 +33,10 @@ class APIKeyControllerClass {
       data: user,
     }
     res.status(201).send(response);
+    next();
   }
 
-  getCountry = (req: Request, res: Response) => {
+  getCountry = (req: Request, res: Response, next: NextFunction) => {
     const { i18n } = res.locals;
 
     const response: ApiResponse<any> = {
@@ -43,9 +44,10 @@ class APIKeyControllerClass {
       data: Countries,
     }
     res.status(201).send(response);
+    next();
   }
 
-  registerCountry = (req: Request, res: Response) => {
+  registerCountry = (req: Request, res: Response, next: NextFunction) => {
     const { i18n } = res.locals;
     const { country: name } = req.body;
     if (!name) {
@@ -57,7 +59,8 @@ class APIKeyControllerClass {
     }
 
     const existCountry = Countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
-    if (!existCountry) {
+
+    if (existCountry) {
       throw new ConflictError({
         message: i18n.__('api-key.country.already-exist', { name }),
         context: [i18n.__('api-key.country.already-exist', { name }),],
@@ -76,6 +79,7 @@ class APIKeyControllerClass {
       data: country,
     }
     res.status(201).send(response);
+    next();
   }
 }
 
