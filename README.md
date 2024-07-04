@@ -18,5 +18,11 @@ $ npm install
 3. After library installation, run the current command on terminal. This will execute `nodemon` starting the server, but keep watching if there is any change on the files.
 
 ```bash
+# Run if you already have an .env file
 $ npm run watch
+```
+
+```bash
+# Run to test the `.env.example` file
+$ npm run watch:example
 ```

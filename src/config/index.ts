@@ -1,7 +1,5 @@
 import * as Joi from 'joi';
-import dotenv from 'dotenv';
-
-dotenv.config();
+require('dotenv').config({ path: process.env.DOTENV });
 
 // Validate, before running, that all the .env variables are set
 export const validateEnv = Joi.object()
